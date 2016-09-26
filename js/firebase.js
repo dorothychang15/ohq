@@ -1,9 +1,9 @@
 require(['https://cdn.firebase.com/js/client/2.4.2/firebase.js'], function (firebase) {});
 
-var temp = rootRef.child("filler");
+// var temp = rootRef.child("filler");
 
 $(document).ready(function () {
-	temp.set({count: 0});
+	// temp.set({count: 0});
   // var numTa = $("#numTa").html();
   // numTa = parseInt(numTa);
 
@@ -108,13 +108,15 @@ $("#issueForm").on("submit", function (e) {
   var issue = issueField.val();
   var category = otherDescrip.val();
   var state = stateField.val();
-  rootRef.child("students").once("value", function (snapshot) {
+  rootRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
       count++;
     });
+    if (count > 3) {
+      count = count - 3;
+    }
   });
   rootRef.child(name).set({studentname: name, issue: issue, category: category, timestamp: Date.now(), state: state, people: count});
-  rootRef.child("students").push({studentname: name});
   nameField.val('');
   issueField.val('');
   otherDescrip.val('');
@@ -124,7 +126,8 @@ $("#issueForm").on("submit", function (e) {
 
 
 $("#button").click(function() {
-  $("#issueForm").submit();
+  // $("#issueForm").submit();
+  checkform();
 });
 
 
@@ -171,23 +174,25 @@ $("#minusTa").click(function(){
 
 var checkform = function () {
   var name = $("#nameInput").val();
-  var flag = false;
-  rootRef.child("students").once("value", function (snapshot) {
+  var count = 0;
+  var okay = true;
+  console.log("okay= " + okay);
+  rootRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
       var data = childSnapshot.val();
       if (data.studentname === name) {
-        if (!flag) {
-          alert("You are already in the queue! Please wait, a TA will be with you as soon as possible.");
-          window.location.href="studentForm.html";
-          $("#nameInput").val('');
-          $("#issueInput").val('');
-          $("#otherDescrip").val('');
-          flag = true;
-        }
+        alert("You are already in the queue! Please wait, a TA will be with you as soon as possible.");
+        window.location.href="studentForm.html";
+        $("#nameInput").val('');
+        $("#issueInput").val('');
+        $("#otherDescrip").val('');
+        okay = false;
       }
     });
-    $("#issueForm").submit();
-    window.location.href="studentSubmitted.html";
+    if (okay) {
+      $("#issueForm").submit();
+      window.location.href="studentSubmitted.html";
+    }
   });
 };
 
