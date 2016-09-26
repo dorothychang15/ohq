@@ -49,7 +49,7 @@ body{
 	width:90%;
 	height:50vh;
 	font-size:50pt;
-	/*background-color:rgb(40,90,150);*/
+
 	background-color:var(--background-color);
 	border:solid 4px var(--accent-color);	
 	border-radius:15px;
@@ -57,7 +57,7 @@ body{
 
 	color:var(--accent-color);
 	letter-spacing:2px;
-	/*border:solid 4px var(--accent-color);*/
+
 	padding-bottom: 15px;
 }
 .taStudOption:hover{
@@ -100,8 +100,6 @@ font-family: Street;
 }
 thead tr{
 	border-bottom:2px solid var(--accent-color);
-
-	/*border-radius: 25px;*/
 }
 tbody tr {
 	font-family:Expressway;
@@ -135,7 +133,6 @@ tbody td{
 form{
 	font-family: Expressway;
 	color:var(--accent-color);
-	/*text-transform: uppercase;*/
 
 }
 input{
@@ -181,7 +178,7 @@ input{
 .submitted{
 	font-family: Expressway;
 	font-size:15pt;
-	/*color:var(--accent-color);*/
+
 }
 
 #state{
