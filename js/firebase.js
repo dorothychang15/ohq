@@ -1,11 +1,11 @@
 require(['https://cdn.firebase.com/js/client/2.4.2/firebase.js'], function (firebase) {});
 
-// var temp = rootRef.child("filler");
+var temp = rootRef.child("filler");
 
 $(document).ready(function () {
 	// temp.set({count: 0});
-  // var numTa = $("#numTa").html();
-  // numTa = parseInt(numTa);
+  var numTa = $("#numTa").html();
+  numTa = parseInt(numTa);
 	temp.set({count: 0});
     var num;
     rootRef.child("tas").once("value", function (snapshot) {
