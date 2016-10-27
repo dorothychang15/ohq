@@ -37,6 +37,23 @@ var func = function (snapshot) {
   var doneButtonContainer = $("<span class='lilButtons'></span>");
   var doneButton = $("<img  src=img/DoneOff.png width=\"25px\"/>");
   doneButton.click(function(e) {
+    rootRef.child(name).once("value", function (snapshot) {
+      var data = snapshot.val();
+      console.log(JSON.stringify(data));
+      var timestamp = data.timestamp;
+      var timePassed = Date.now() - timestamp;
+      var minutes = timePassed / 60000.0;
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var date = month + '/' + day;
+      rootRef.child("metrics").child(date).once("value", function (snap) {
+        var dateSnap = snap.val();
+        console.log(JSON.stringify(dateSnap));
+        var total = dateSnap.time;
+        rootRef.child("metrics").child(date).set({time: total + minutes});
+      });
+    });
     rootRef.child(name).remove();
     location.reload();
   });
@@ -93,6 +110,8 @@ var func = function (snapshot) {
 
 rootRef.limitToLast(50).on("child_added", func);
 
+rootRef.limitToLast(50).on("child_removed", func);
+
 rootRef.limitToLast(50).on("value", func);
 
 var nameField = $("#nameInput");
@@ -109,11 +128,30 @@ $("#issueForm").on("submit", function (e) {
     snapshot.forEach(function (childSnapshot) {
       count++;
     });
-    if (count > 3) {
-      count = count - 3;
+    if (count > 4) {
+      count = count - 4;
     }
   });
   rootRef.child(name).set({studentname: name, issue: issue, category: category, timestamp: Date.now(), state: state, people: count});
+  var d = new Date();
+  var month = d.getMonth() + 1;
+  var day = d.getDate();
+  var date = month + '/' + day;
+  console.log('date' + date);
+  rootRef.child("metrics").child(date).once("value", function (snapshot) {
+    var flag = (snapshot.val() !== null);
+    console.log(flag);
+    if (flag) {
+      var data = snapshot.val();
+      var count = data.count;
+      rootRef.child("metrics").child(date).set({count: count + 1});
+      console.log(JSON.stringify(data));
+      console.log("count " + (count+1));
+    } else {
+      rootRef.child("metrics").child(date).set({count: 1, time: 0});
+      console.log("count " + 1);
+    }
+  });
   nameField.val('');
   issueField.val('');
   otherDescrip.val('');

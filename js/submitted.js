@@ -4,8 +4,8 @@ rootRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
       count++;
     });
-    if (count > 1) {
-      count = count - 1;
+    if (count > 2) {
+      count = count - 2;
     }
     var rand = Math.floor(Math.random()*5);
     $("#peopleInFront").html(count);
