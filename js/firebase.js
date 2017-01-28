@@ -19,7 +19,6 @@ $(document).ready(function () {
     });
 });
 
-
 var count = 0;
 
 var func = function (snapshot) {
