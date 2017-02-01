@@ -3,7 +3,6 @@ require(['https://cdn.firebase.com/js/client/2.4.2/firebase.js'], function (fire
 var temp = rootRef.child("filler");
 
 $(document).ready(function () {
-	// temp.set({count: 0});
   var numTa = $("#numTa").html();
   numTa = parseInt(numTa);
 	temp.set({count: 0});
@@ -168,6 +167,11 @@ $("#button").click(function() {
  $("#ohq").click(function(){
   window.location.href="index.html";
 
+ });
+
+ $("#removeStudentButton").click(function () {
+    var name = prompt("Please enter your name");
+    rootRef.child(name).remove();
  });
 
 
