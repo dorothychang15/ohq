@@ -108,8 +108,6 @@ var func = function (snapshot) {
 
 rootRef.limitToLast(50).on("child_added", func);
 
-rootRef.limitToLast(50).on("child_removed", func);
-
 rootRef.limitToLast(50).on("value", func);
 
 var nameField = $("#nameInput");
@@ -224,4 +222,30 @@ var checkform = function () {
     }
   });
 };
+
+$("#clearStud").click(function() {
+  rootRef.on("value", function(snapshot) {
+    var data = snapshot.val();
+
+    // Iterate over data to find students
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        // Ignore non-student data
+        if (!(key === "filler" || key === "metrics" || key === "tas")) {
+
+          // Remove Student Reference
+          rootRef.child(key).remove()
+          .then(function () {
+            console.log("Removed " + key);
+          }).catch(function (err) {
+            console.log(err);
+          })
+        }
+      }
+    }
+
+    // Remove student from view
+    $("#queueElem").empty();
+  })
+})
 
