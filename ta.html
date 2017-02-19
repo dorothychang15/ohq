@@ -65,56 +65,65 @@
         }
 
         @media screen and (max-height: 450px) {
-          .overlay a {font-size: 20px}
-          .overlay .closebtn {
-            font-size: 40px;
-            top: 15px;
-            right: 35px;
-          }
+            .overlay a {
+                font-size: 20px
+            }
+            .overlay .closebtn {
+                font-size: 40px;
+                top: 15px;
+                right: 35px;
+            }
         }
-        </style>
-  </head>
+    </style>
+</head>
 
-  <body>
+<body>
     <div class="row">
-      <div class="col-md-3 text-center" id="clearStud">clear <br> students</div>  
-      <div class="col-md-6 text-center" id="ohq"><div id="ohq">OHQ</div><div id="tagline">OFFICE HOURS QUEUE</div></div>
-      <div class="col-md-1 text-center" id="numTaText"><span id="minusTa">-</span><span id="numTa"></span><span id="plusTa">+</span><br> TA'S ON DUTY</div>
+        <div class="col-md-3 text-center" id="clearStud">clear <br> students</div>
+        <div class="col-md-6 text-center" id="ohq">
+            <div id="ohq">OHQ</div>
+            <div id="tagline">OFFICE HOURS QUEUE</div>
+        </div>
+        <div class="col-md-1 text-center" id="numTaText"><span id="minusTa">-</span><span id="numTa"></span><span id="plusTa">+</span><br> TA'S ON DUTY</div>
 
-      <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
     <table class="table borderless" cellspacing="5px">
 
-      <thead>
-        <tr>
-          <th> Student </th>
-          <th> Category </th>
-          <th> Issue </th>
-          <th> Wait time </th>
-          <th> Status </th>
-        </tr>
+        <thead>
+            <tr>
+                <th> Student </th>
+                <th> Category </th>
+                <th> Issue </th>
+                <th> Wait time </th>
+                <th> Status </th>
+            </tr>
 
-      </thead>
+        </thead>
 
-      <tbody id="queueElem">
-      </tbody>
+        <tbody id="queueElem">
+        </tbody>
     </table>
 
-      <div id="myNav" class="overlay">
+    <div id="myNav" class="overlay">
         <div class="overlay-content">
-  	         <p style="color:white;">Password:</p>
-             <input type="text" id="PASSWORD_INPUT">
-             <button onclick="checkPass()">Submit</button>
+            <p style="color:white;">Password:</p>
+            <input type="text" id="PASSWORD_INPUT">
+            <button onclick="checkPass()">Submit</button>
         </div>
-      </div>
+    </div>
 
     <script>
-        function checkPass() {
-            var textBox = document.getElementById("PASSWORD_INPUT");
-            var answer = textBox.value;
-            if(answer == "st3v3ocaml"){
+        var checkPass = function() {
+            var answer = document.getElementById("PASSWORD_INPUT").value;
+            console.log(answer);
+            var hash = sjcl.hash.sha256.hash(answer).toString();
+            console.log(hash);
+            var pword = ("-2091858537,-2134294547,1325024883,1078991922," +
+                "-399792425,-272296192,-752711352,-2011847339");
+            if (hash === pword) {
                 document.getElementById("myNav").style.width = "0%";
             }
         }
@@ -123,6 +132,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- SJCL must come before Require.js to prevent namespace clashing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.6/sjcl.min.js"></script>
 
      <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 
