@@ -199,29 +199,27 @@ $("#minusTa").click(function(){
    rootRef.child("tas").set({num: num});
 });
 
-var checkform = function () {
+var checkform = function() {
   var name = $("#nameInput").val();
-  var count = 0;
-  var okay = true;
-  console.log("okay= " + okay);
-  rootRef.once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
+
+  rootRef.once("value", function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
       var data = childSnapshot.val();
       if (data.studentname === name) {
         alert("You are already in the queue! Please wait, a TA will be with you as soon as possible.");
-        window.location.href="studentForm.html";
+        // window.location.href = "studentForm.html";
         $("#nameInput").val('');
         $("#issueInput").val('');
         $("#otherDescrip").val('');
-        okay = false;
+        return false;
       }
     });
-    if (okay) {
-      $("#issueForm").submit();
-      window.location.href="studentSubmitted.html";
-    }
   });
+
+  return true;
 };
+
+$("#issueForm").submit(checkform);
 
 $("#clearStud").click(function() {
   rootRef.on("value", function(snapshot) {
@@ -248,4 +246,3 @@ $("#clearStud").click(function() {
     $("#queueElem").empty();
   })
 })
-
