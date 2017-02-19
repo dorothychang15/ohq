@@ -109,25 +109,13 @@
 
     <div id="myNav" class="overlay">
         <div class="overlay-content">
-            <p style="color:white;">Password:</p>
-            <input type="text" id="PASSWORD_INPUT">
-            <button onclick="checkPass()">Submit</button>
+            <form id="ta-password">
+                <span style="color: white;">Password:</span>
+                <input type="password" id="password-input">
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
-
-    <script>
-        var checkPass = function() {
-            var answer = document.getElementById("PASSWORD_INPUT").value;
-            console.log(answer);
-            var hash = sjcl.hash.sha256.hash(answer).toString();
-            console.log(hash);
-            var pword = ("-2091858537,-2134294547,1325024883,1078991922," +
-                "-399792425,-272296192,-752711352,-2011847339");
-            if (hash === pword) {
-                document.getElementById("myNav").style.width = "0%";
-            }
-        }
-    </script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -158,6 +146,21 @@
     
     <script src="js/firebase.js"></script>
     <script src="js/background.js"></script>
-  
+
+    <script>
+      $(function() {
+          $("#ta-password").submit(function() {
+              var answer = $("#password-input").val();
+              var hash = sjcl.hash.sha256.hash(answer).toString();
+              var pword = ("-2091858537,-2134294547,1325024883,1078991922," +
+                  "-399792425,-272296192,-752711352,-2011847339");
+              if (hash === pword) {
+                  document.getElementById("myNav").style.width = "0%";
+              }
+              return false;
+          });
+      });
+    </script>
+
   </body>
 </html>
