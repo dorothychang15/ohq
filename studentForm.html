@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,73 +11,65 @@
     <link rel="icon" href="#">
 
     <title>Office Hours Queue</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
 
-
-  </head>
-  <body>
-      <div class="row">
-      <div class="col-md-12 text-center" id="ohq">OHQ</div>
-      <div class="col-md-12 text-center" id="tagline">OFFICE HOURS QUEUE</div>
+<body>
+    <div class="row">
+        <div class="col-md-12 text-center" id="ohq">OHQ</div>
+        <div class="col-md-12 text-center" id="tagline">OFFICE HOURS QUEUE</div>
     </div>
 
-  <form id="issueForm">
-
-  	<div>Name </div>
-  	<input class="form-control" type="text" name="name" id="nameInput"> <br>
-  	<div>What do you need help with?</div>
-  	<textarea class="form-control" type="textarea" rows="5" name"issue" id="issueInput"></textarea><br>
-    <div>Select a category</div><br>
-    <input  class="form-control" type="text" name="typeOther" id="otherDescrip" ><br>
-
-
-    <div> 
-      <p>
-      <a id="button" href="studentSubmitted.html" class="btn btn-default" onclick="checkform(); return false;" value="Submit">Enter the queue</a>
-      </p>
+    <div class="container" style="width: 50%;">
+        <form id="issueForm" action="/studentSubmitted.html">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input class="form-control" type="text" name="name" id="nameInput">
+            </div>
+            <div class="form-group">
+                <label for="issueInput">What do you need help with?</label>
+                <textarea class="form-control" rows="5" name="issue" id="issueInput"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="otherDescrip">Select a category</label>
+                <input class="form-control" type="text" name="typeOther" id="otherDescrip">
+            </div>
+            <input id="state" type="hidden" value="waiting">
+            <button id="button" type="submit" class="btn btn-default">Enter the queue</button>
+        </form>
     </div>
-    <input id="state" value="waiting"> 
-    </form>
-
-  </form> 
-
-
-
-
-
-  
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 
     <script src="http://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
 
     <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAcet_DewFl76QN5hS4p0j_dzOOJODSZo4",
-        authDomain: "queue-26963.firebaseapp.com",
-        databaseURL: "https://queue-26963.firebaseio.com",
-        storageBucket: "",
-      };
-      firebase.initializeApp(config);
-      var rootRef = firebase.database().ref();
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAcet_DewFl76QN5hS4p0j_dzOOJODSZo4",
+            authDomain: "queue-26963.firebaseapp.com",
+            databaseURL: "https://queue-26963.firebaseio.com",
+            storageBucket: "",
+        };
+        firebase.initializeApp(config);
+        var rootRef = firebase.database().ref();
     </script>
-    
+
     <script src="js/firebase.js"></script>
     <script src="js/background.js"></script>
 
-  </body>
+</body>
 </html>

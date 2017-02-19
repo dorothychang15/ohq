@@ -51,7 +51,7 @@ body{
 	font-size:50pt;
 
 	background-color:var(--background-color);
-	border:solid 4px var(--accent-color);	
+	border:solid 4px var(--accent-color);
 	border-radius:15px;
 	line-height:45vh;
 
@@ -70,7 +70,7 @@ body{
     -moz-transition: background-color 800ms ease, color 800ms ease;
     -o-transition: background-color 800ms ease, color 800ms ease;
     transition: background-color 800ms ease, color 800ms ease;
-   
+
 }
 
 .taStudOption:active{
@@ -141,51 +141,40 @@ tbody td{
 	border:2px solid var(--second-accent-color);
 }
 /*------------form page style--------------*/
-form{
+form {
 	font-family: Expressway;
 	color:var(--accent-color);
-
 }
-input{
+input {
 	color:var(--background-color);
-	width:20%;
 }
-.form-control:focus{
+.form-control:focus {
 	color:rgb(10,10,10);
 }
-.form-control, #issueForm div{
-	width:40%;
-	margin-left:30%;
-
-}
-.form-control{
+.form-control {
 	background-color:var(--form-background-color);
 }
-.lilButtons{
+.lilButtons {
 	padding:5px;
 	margin:5px;
 }
 .lilButtons:hover {
 	cursor:pointer;
-
-
 }
-#button{
+#button {
 	font-size:14pt;
-
 	color:var(--second-accent-color);
 	background-color:var(--background-color);
 	border:2px solid var(--second-accent-color);
 }
-#removeStudentButton{
+#removeStudentButton {
 	font-size: 14pt;
 	color:var(--second-accent-color);
 	background-color:var(--background-color);
 	border:2px solid var(--second-accent-color);
 }
-#button:hover{
+#button:hover {
 	background-color:var(--form-background-color);
-
 	-webkit-transition: background-color 400ms ease;
     -moz-transition: background-color 400ms ease;
     -o-transition:background-color 400ms ease;
@@ -201,4 +190,3 @@ input{
 #state{
 	display:none;
 }
-
