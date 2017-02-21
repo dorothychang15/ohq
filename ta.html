@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,14 +11,14 @@
     <link rel="icon" href="#">
 
     <title>Office Hours Queue</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/stylesheet.css">
-      
-      <style>
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <style>
         body {
             margin: 0;
             font-family: 'Lato', sans-serif;
@@ -27,11 +28,9 @@
             height: 100%;
             width: 100%;
             position: fixed;
-            z-index: 1;
             top: 0;
             left: 0;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0, 0.9);
+            background-color: black;
             overflow-x: hidden;
             transition: 0.5s;
         }
@@ -43,77 +42,21 @@
             text-align: center;
             margin-top: 30px;
         }
-
-        .overlay a {
-            padding: 8px;
-            text-decoration: none;
-            font-size: 36px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .overlay a:hover, .overlay a:focus {
-            color: #f1f1f1;
-        }
-
-        .overlay .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 45px;
-            font-size: 60px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .overlay a {
-                font-size: 20px
-            }
-            .overlay .closebtn {
-                font-size: 40px;
-                top: 15px;
-                right: 35px;
-            }
-        }
     </style>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-md-3 text-center" id="clearStud">clear <br> students</div>
-        <div class="col-md-6 text-center" id="ohq">
-            <div id="ohq">OHQ</div>
-            <div id="tagline">OFFICE HOURS QUEUE</div>
-        </div>
-        <div class="col-md-1 text-center" id="numTaText"><span id="minusTa">-</span><span id="numTa"></span><span id="plusTa">+</span><br> TA'S ON DUTY</div>
-
-        <div class="col-md-2"></div>
-    </div>
-
-
-    <table class="table borderless" cellspacing="5px">
-
-        <thead>
-            <tr>
-                <th> Student </th>
-                <th> Category </th>
-                <th> Issue </th>
-                <th> Wait time </th>
-                <th> Status </th>
-            </tr>
-
-        </thead>
-
-        <tbody id="queueElem">
-        </tbody>
-    </table>
-
-    <div id="myNav" class="overlay">
-        <div class="overlay-content">
-            <form id="ta-password">
-                <span style="color: white;">Password:</span>
-                <input type="password" id="password-input">
-                <button type="submit">Submit</button>
-            </form>
+    <div id="main">
+        <div id="myNav" class="overlay">
+            <div class="overlay-content">
+                <form id="ta-password" class="form-inline">
+                    <div class="form-group">
+                        <label for="password-input" style="color: white;">Password:</label>
+                        <input type="password" id="password-input" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -123,44 +66,27 @@
 
     <!-- SJCL must come before Require.js to prevent namespace clashing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.6/sjcl.min.js"></script>
-
-     <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script src="http://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
 
     <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAcet_DewFl76QN5hS4p0j_dzOOJODSZo4",
-        authDomain: "queue-26963.firebaseapp.com",
-        databaseURL: "https://queue-26963.firebaseio.com",
-        storageBucket: "",
-      };
-      firebase.initializeApp(config);
-      var rootRef = firebase.database().ref();
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAcet_DewFl76QN5hS4p0j_dzOOJODSZo4",
+            authDomain: "queue-26963.firebaseapp.com",
+            databaseURL: "https://queue-26963.firebaseio.com",
+            storageBucket: "",
+        };
+        firebase.initializeApp(config);
+        var rootRef = firebase.database().ref();
     </script>
-    
+
     <script src="js/firebase.js"></script>
     <script src="js/background.js"></script>
+    <script src="js/ta.js"></script>
 
-    <script>
-      $(function() {
-          $("#ta-password").submit(function() {
-              var answer = $("#password-input").val();
-              var hash = sjcl.hash.sha256.hash(answer).toString();
-              var pword = ("-2091858537,-2134294547,1325024883,1078991922," +
-                  "-399792425,-272296192,-752711352,-2011847339");
-              if (hash === pword) {
-                  document.getElementById("myNav").style.width = "0%";
-              }
-              return false;
-          });
-      });
-    </script>
+</body>
 
-  </body>
 </html>
