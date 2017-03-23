@@ -224,28 +224,30 @@ var checkform = function () {
 };
 
 $("#clearStud").click(function() {
-  rootRef.on("value", function(snapshot) {
-    var data = snapshot.val();
+  if (confirm("Are you sure?")) {
+    rootRef.on("value", function(snapshot) {
+      var data = snapshot.val();
 
-    // Iterate over data to find students
-    for (var key in data) {
-      if (data.hasOwnProperty(key)) {
-        // Ignore non-student data
-        if (!(key === "filler" || key === "metrics" || key === "tas")) {
+      // Iterate over data to find students
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          // Ignore non-student data
+          if (!(key === "filler" || key === "metrics" || key === "tas")) {
 
-          // Remove Student Reference
-          rootRef.child(key).remove()
-          .then(function () {
-            console.log("Removed " + key);
-          }).catch(function (err) {
-            console.log(err);
-          })
+            // Remove Student Reference
+            rootRef.child(key).remove()
+            .then(function () {
+              console.log("Removed " + key);
+            }).catch(function (err) {
+              console.log(err);
+            })
+          }
         }
       }
-    }
 
-    // Remove student from view
-    $("#queueElem").empty();
-  })
+      // Remove student from view
+      $("#queueElem").empty();
+    })
+  }
 })
 
