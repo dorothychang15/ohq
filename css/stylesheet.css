@@ -129,6 +129,17 @@ tbody td{
 #plusTa:hover, #minusTa:hover{
 	cursor:pointer;
 }
+#clearStud:hover{
+	cursor:pointer;
+}
+#clearStud{
+	margin-top: 50px;
+	margin-left: 50px;
+	font-family:Comfortaa-Regular;
+	font-size:15pt;
+	color:var(--second-accent-color);
+	border:2px solid var(--second-accent-color);
+}
 /*------------form page style--------------*/
 form{
 	font-family: Expressway;
